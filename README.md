@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+
 <html lang="es">
 <head>
   <meta charset="UTF-8">
@@ -570,6 +570,5 @@
     renderFiados();
   </script>
 </body>
-</ht 
 
 Desarrollado por Gustavo Enrique Vega Mercado
