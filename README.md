@@ -1,7 +1,85 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Tienda Emanuel</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f6f8;
+      padding: 20px;
+      color: #333;
+    }
 
+    h1 {
+      text-align: center;
+      color: #2c3e50;
+    }
+
+    section {
+      background: white;
+      padding: 20px;
+      margin-bottom: 30px;
+      border-radius: 10px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    input {
+      margin: 5px;
+      padding: 8px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+
+    button {
+      padding: 8px 12px;
+      margin: 5px;
+      border: none;
+      border-radius: 5px;
+      background: #3498db;
+      color: white;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #2980b9;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 15px;
+    }
+
+    th, td {
+      padding: 10px;
+      border: 1px solid #ddd;
+      text-align: center;
+    }
+
+    th {
+      background-color: #3498db;
+      color: white;
+    }
+
+    .resumen {
+      font-weight: bold;
+      margin-top: 10px;
+      color: #e67e22;
+    }
+
+    .boton-secundario {
+      background-color: #e74c3c;
+    }
+
+    .boton-secundario:hover {
+      background-color: #c0392b;
+    }
+  </style>
+</head>
+<body>
   <h1>Tienda Emanuel</h1>
 
-  <!-- Inventario -->
   <section>
     <h2>Inventario</h2>
     <input type="text" id="producto" placeholder="Producto" />
@@ -25,7 +103,6 @@
     <p class="resumen">Total invertido: $<span id="total-invertido">0.00</span></p>
   </section>
 
-  <!-- Fiados -->
   <section>
     <h2>Fiados</h2>
     <input type="text" id="nombre" placeholder="Nombre" />
@@ -56,11 +133,11 @@
     }
 
     function agregarInventario() {
-      const producto = document.getElementById("producto").value.trim();
+      const producto = document.getElementById("producto").value;
       const cantidad = parseInt(document.getElementById("cantidad").value);
       const precio = parseFloat(document.getElementById("precio").value);
 
-      if (!producto || isNaN(cantidad) || cantidad <= 0 || isNaN(precio) || precio <= 0) {
+      if (!producto || cantidad <= 0 || precio <= 0) {
         alert("Por favor, ingresa todos los campos correctamente.");
         return;
       }
@@ -80,10 +157,10 @@
       let total = 0;
 
       inventario.forEach((item, index) => {
+        const fila = document.createElement("tr");
         const totalItem = item.cantidad * item.precio;
         total += totalItem;
 
-        const fila = document.createElement("tr");
         fila.innerHTML = `
           <td contenteditable="true">${item.producto}</td>
           <td contenteditable="true">${item.cantidad}</td>
@@ -103,16 +180,15 @@
     function guardarEdicionInventario(index, btn) {
       const fila = btn.closest("tr");
       const celdas = fila.querySelectorAll("td");
-
       const producto = celdas[0].textContent.trim();
       const cantidad = parseInt(celdas[1].textContent.trim());
       const precio = parseFloat(celdas[2].textContent.trim());
 
-      if (!producto || isNaN(cantidad) || isNaN(precio)) return;
-
-      inventario[index] = { producto, cantidad, precio };
-      guardarDatos();
-      renderInventario();
+      if (producto && !isNaN(cantidad) && !isNaN(precio)) {
+        inventario[index] = { producto, cantidad, precio };
+        guardarDatos();
+        renderInventario();
+      }
     }
 
     function eliminarInventario(index) {
@@ -132,10 +208,10 @@
     }
 
     function agregarFiado() {
-      const nombre = document.getElementById("nombre").value.trim();
+      const nombre = document.getElementById("nombre").value;
       const deuda = parseFloat(document.getElementById("deuda").value);
 
-      if (!nombre || isNaN(deuda) || deuda <= 0) {
+      if (!nombre || deuda <= 0 || isNaN(deuda)) {
         alert("Por favor, completa todos los campos correctamente.");
         return;
       }
@@ -174,15 +250,14 @@
     function guardarEdicionFiado(index, btn) {
       const fila = btn.closest("tr");
       const celdas = fila.querySelectorAll("td");
-
       const nombre = celdas[0].textContent.trim();
       const deuda = parseFloat(celdas[1].textContent.trim());
 
-      if (!nombre || isNaN(deuda)) return;
-
-      fiados[index] = { nombre, deuda };
-      guardarDatos();
-      renderFiados();
+      if (nombre && !isNaN(deuda)) {
+        fiados[index] = { nombre, deuda };
+        guardarDatos();
+        renderFiados();
+      }
     }
 
     function eliminarFiado(index) {
@@ -205,5 +280,7 @@
     renderFiados();
   </script>
 </body>
+</html>
+
 
 Desarrollado por Gustavo Enrique Vega Mercado
