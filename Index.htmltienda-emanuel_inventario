@@ -88,7 +88,7 @@
     <input type="number" id="precio" placeholder="Precio por unidad $" />
     <button onclick="agregarInventario()">Agregar</button>
     <button class="boton-secundario" onclick="borrarTodoInventario()">Borrar Todo</button>
-
+<button onclick="descargarImagen()">Descargar Inventario</button>
     <table>
       <thead>
         <tr>
