@@ -30,51 +30,27 @@
       border-radius: 5px;
       border: 1px solid #ccc;
     }
+button {
+  padding: 10px 16px;
+  margin: 5px;
+  border: none;
+  border-radius: 8px;
+  background: linear-gradient(135deg,#3498db,#2c80b4);
+  color: white;
+  cursor: pointer;
+  font-weight: bold;
+  transition: 0.2s;
+}
 
-    button {
-      padding: 8px 12px;
-      margin: 5px;
-      border: none;
-      border-radius: 5px;
-      background: #3498db;
-      color: white;
-      cursor: pointer;
-    }
+button:hover{
+  transform: scale(1.05);
+  box-shadow: 0px 4px 10px rgba(0,0,0,0.2);
+}
 
-    button:hover {
-      background: #2980b9;
-    }
+.boton-secundario{
+  background: linear-gradient(135deg,#e74c3c,#c0392b);
+}
 
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 15px;
-    }
-
-    th, td {
-      padding: 10px;
-      border: 1px solid #ddd;
-      text-align: center;
-    }
-
-    th {
-      background-color: #3498db;
-      color: white;
-    }
-
-    .resumen {
-      font-weight: bold;
-      margin-top: 10px;
-      color: #e67e22;
-    }
-
-    .boton-secundario {
-      background-color: #e74c3c;
-    }
-
-    .boton-secundario:hover {
-      background-color: #c0392b;
-    }
   </style>
 </head>
 <body>
@@ -279,9 +255,19 @@
         renderFiados();
       }
     }
+function descargarImagen(){
+  const area = document.body;
 
+  html2canvas(area).then(canvas => {
+    const link = document.createElement("a");
+    link.download = "inventario.png";
+    link.href = canvas.toDataURL();
+    link.click();
+  });
+}
     renderInventario();
     renderFiados();
+<script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
   </script>
 </body>
 </html>
